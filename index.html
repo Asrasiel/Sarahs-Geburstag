@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sarahs Tanzstunde</title>
+<meta name="robots" content="noindex, nofollow" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💃</text></svg>" />
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<!-- ================= PASSWORT-SCREEN ================= -->
+<div id="password-screen">
+  <div class="password-card">
+    <div class="password-icon">💃🕺</div>
+    <h2>Willkommen im Studio</h2>
+    <p>Diese Seite ist nur für eine bestimmte Person gedacht. Kennwort eingeben, um reinzukommen.</p>
+    <form id="password-form">
+      <input type="password" id="password-input" placeholder="Passwort" autocomplete="off" required />
+      <div class="password-error" id="password-error"></div>
+      <button type="submit" class="btn">Reinkommen</button>
+    </form>
+    <div class="password-hint">Hinweis: kein echter Sicherheitsschutz, nur ein Spaß-Türsteher.</div>
+  </div>
+</div>
+
+<!-- ================= APP ================= -->
+<div id="app-shell" class="hidden">
+
+  <div id="progress-wrap">
+    <div id="progress-label"></div>
+    <div id="progress-bar-outer"><div id="progress-bar-inner"></div></div>
+  </div>
+
+  <div class="announcer" id="announcer">
+    <span class="announcer-icon">🎙️</span>
+    <p id="announcer-text">Willkommen.</p>
+  </div>
+
+  <main id="screen-root">
+
+    <!-- WELCOME -->
+    <section class="screen" id="screen-welcome">
+      <div class="card">
+        <h1 id="welcome-title"></h1>
+        <div id="welcome-lines"></div>
+        <button class="btn" id="welcome-button"></button>
+      </div>
+    </section>
+
+    <!-- STATION 1: Quiz -->
+    <section class="screen hidden" id="screen-p1">
+      <div class="card" id="screen-p1-card">
+        <h2 id="p1-title"></h2>
+        <p id="p1-intro"></p>
+        <div class="option-grid" id="p1-options"></div>
+        <div class="feedback-row" id="p1-feedback"></div>
+      </div>
+    </section>
+
+    <!-- STATION 2: Insider-Wissen -->
+    <section class="screen hidden" id="screen-p2">
+      <div class="card" id="screen-p2-card">
+        <h2 id="p2-title"></h2>
+        <p id="p2-intro"></p>
+        <div class="option-grid" id="p2-options"></div>
+        <div class="feedback-row" id="p2-feedback"></div>
+      </div>
+    </section>
+
+    <!-- STATION 3: Feingefühl (Slider) -->
+    <section class="screen hidden" id="screen-p3">
+      <div class="card" id="screen-p3-card">
+        <h2 id="p3-title"></h2>
+        <p id="p3-intro"></p>
+        <div class="feel-slider-wrap">
+          <div class="feel-slider-value" id="p3-value">100</div>
+          <input type="range" id="p3-slider" />
+        </div>
+        <div class="feedback-row" id="p3-feedback"></div>
+        <button class="btn" id="p3-submit">Prüfen</button>
+      </div>
+    </section>
+
+    <!-- STATION 4: Wortspiel -->
+    <section class="screen hidden" id="screen-p4">
+      <div class="card" id="screen-p4-card">
+        <h2 id="p4-title"></h2>
+        <p id="p4-intro"></p>
+        <div class="scrambled-letters" id="p4-scrambled"></div>
+        <div class="puzzle-body">
+          <input type="text" id="p4-input" class="answer-input" placeholder="Deine Antwort" />
+        </div>
+        <div class="feedback-row" id="p4-feedback"></div>
+        <button class="btn" id="p4-submit">Prüfen</button>
+      </div>
+    </section>
+
+    <!-- STATION 5: Insider-Wissen -->
+    <section class="screen hidden" id="screen-p5">
+      <div class="card" id="screen-p5-card">
+        <h2 id="p5-title"></h2>
+        <p id="p5-intro"></p>
+        <div class="option-grid" id="p5-options"></div>
+        <div class="feedback-row" id="p5-feedback"></div>
+      </div>
+    </section>
+
+    <!-- STATION 6: Insider-Wissen -->
+    <section class="screen hidden" id="screen-p6">
+      <div class="card" id="screen-p6-card">
+        <h2 id="p6-title"></h2>
+        <p id="p6-intro"></p>
+        <div class="option-grid" id="p6-options"></div>
+        <div class="feedback-row" id="p6-feedback"></div>
+      </div>
+    </section>
+
+    <!-- STATION 7: Finale Matching -->
+    <section class="screen hidden" id="screen-p7">
+      <div class="card" id="screen-p7-card">
+        <h2 id="p7-title"></h2>
+        <p id="p7-intro"></p>
+        <div class="match-board" id="p7-board"></div>
+        <div class="feedback-row" id="p7-feedback"></div>
+      </div>
+    </section>
+
+    <!-- COUNTDOWN-FINALE -->
+    <section class="screen hidden" id="screen-countdown">
+      <div class="card">
+        <h2 id="countdown-heading"></h2>
+        <p id="countdown-before-text"></p>
+        <div class="countdown-wrap hidden" id="countdown-wrap">
+          <div class="countdown-unit"><span class="value" id="cd-days">0</span><span class="label">Tage</span></div>
+          <div class="countdown-unit"><span class="value" id="cd-hours">0</span><span class="label">Std</span></div>
+          <div class="countdown-unit"><span class="value" id="cd-minutes">0</span><span class="label">Min</span></div>
+          <div class="countdown-unit"><span class="value" id="cd-seconds">0</span><span class="label">Sek</span></div>
+        </div>
+        <p id="countdown-reopen-note" style="font-size:0.85rem;color:var(--text-dim);"></p>
+
+        <div id="countdown-after" class="hidden">
+          <h3 id="countdown-after-heading"></h3>
+          <p id="countdown-after-text"></p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="credits">
+    gebastelt mit Rhythmus und viel Liebe
+    <br />
+    <a href="#" id="reset-link" style="color:inherit;text-decoration:underline;">Von vorne beginnen</a>
+  </footer>
+</div>
+
+<script src="data/content.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

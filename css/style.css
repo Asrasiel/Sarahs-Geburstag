@@ -1,0 +1,446 @@
+@import url("https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@400;600;700&display=swap");
+
+:root {
+  --bg: #1a0e0e;
+  --bg-2: #240f0f;
+  --card: #2c1414;
+  --card-border: #4a1f1f;
+  --text: #f7e9df;
+  --text-dim: #d9b8a8;
+  --gold: #e0954f;
+  --gold-strong: #f2ab5e;
+  --rust: #b8283f;
+  --rust-strong: #d43a52;
+  --green: #7cb379;
+  --red: #d16457;
+  --radius: 18px;
+  --shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+  font-size: 16px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background: radial-gradient(circle at 20% 0%, var(--bg-2), var(--bg) 60%);
+  color: var(--text);
+  font-family: "Nunito", system-ui, sans-serif;
+  line-height: 1.5;
+}
+
+body {
+  background-attachment: fixed;
+}
+
+h1,
+h2,
+h3 {
+  font-family: "Baloo 2", "Nunito", sans-serif;
+  color: var(--gold-strong);
+  margin: 0 0 0.5em;
+  line-height: 1.2;
+}
+
+p {
+  margin: 0 0 1em;
+}
+
+button {
+  font-family: inherit;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* Layout shell */
+#app-shell {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 24px 18px 64px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Password screen */
+#password-screen {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.password-card {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 36px 28px;
+  max-width: 380px;
+  width: 100%;
+  text-align: center;
+}
+
+.password-card .password-icon {
+  font-size: 3rem;
+  margin-bottom: 12px;
+}
+
+.password-card p {
+  color: var(--text-dim);
+  font-size: 0.95rem;
+}
+
+.password-card input[type="password"] {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--card-border);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 1rem;
+  margin: 10px 0;
+  text-align: center;
+}
+
+.password-card input[type="password"]:focus {
+  outline: 2px solid var(--gold);
+}
+
+.password-error {
+  color: var(--red);
+  font-size: 0.9rem;
+  min-height: 1.3em;
+  margin-top: 4px;
+}
+
+.password-hint {
+  margin-top: 18px;
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  opacity: 0.7;
+}
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  padding: 12px 26px;
+  border-radius: 999px;
+  border: none;
+  background: linear-gradient(135deg, var(--rust-strong), var(--rust));
+  color: #fff8ee;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(184, 40, 63, 0.35);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 22px rgba(184, 40, 63, 0.45);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-secondary {
+  background: transparent;
+  border: 1px solid var(--card-border);
+  color: var(--text);
+  box-shadow: none;
+}
+
+/* Progress bar */
+#progress-wrap {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  padding: 10px 0 16px;
+  background: linear-gradient(var(--bg) 70%, transparent);
+}
+
+#progress-label {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  margin-bottom: 6px;
+  text-align: center;
+}
+
+#progress-bar-outer {
+  height: 10px;
+  border-radius: 999px;
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  overflow: hidden;
+}
+
+#progress-bar-inner {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--gold), var(--gold-strong));
+  transition: width 0.4s ease;
+}
+
+/* Studio announcer banner (statt Maskottchen-Sprechblase) */
+.announcer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-left: 4px solid var(--gold);
+  border-radius: 14px;
+  padding: 14px 16px;
+  margin: 18px 0 24px;
+  font-size: 0.98rem;
+}
+
+.announcer .announcer-icon {
+  font-size: 1.4rem;
+  flex-shrink: 0;
+}
+
+.announcer p {
+  margin: 0;
+}
+
+.announcer.reaction-correct {
+  border-left-color: var(--green);
+}
+
+.announcer.reaction-wrong {
+  border-left-color: var(--red);
+}
+
+/* Screens / cards */
+.screen {
+  animation: fade-in 0.35s ease;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 24px 22px;
+  margin-bottom: 18px;
+}
+
+.card-hero-img {
+  width: 100%;
+  border-radius: var(--radius);
+  border: 1px solid var(--card-border);
+  margin-bottom: 18px;
+  display: block;
+}
+
+/* Puzzle form elements */
+.puzzle-body {
+  margin: 18px 0;
+}
+
+.scrambled-letters {
+  font-family: "Baloo 2", sans-serif;
+  font-size: 1.4rem;
+  letter-spacing: 4px;
+  color: var(--gold-strong);
+  text-align: center;
+  margin: 16px 0;
+  word-spacing: 12px;
+}
+
+.answer-input {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--card-border);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 1.05rem;
+  margin: 4px 0 8px;
+}
+
+.answer-input:focus {
+  outline: 2px solid var(--gold);
+}
+
+.option-grid {
+  display: grid;
+  gap: 10px;
+  margin: 16px 0;
+}
+
+.option-btn {
+  text-align: left;
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: 1px solid var(--card-border);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.option-btn:hover {
+  border-color: var(--gold);
+}
+
+.option-btn.selected {
+  border-color: var(--gold);
+  background: rgba(224, 149, 79, 0.12);
+}
+
+.option-btn.correct {
+  border-color: var(--green);
+  background: rgba(124, 179, 121, 0.15);
+}
+
+.option-btn.incorrect {
+  border-color: var(--red);
+  background: rgba(209, 100, 87, 0.15);
+}
+
+/* Feingefühl-Slider (BPM) */
+.feel-slider-wrap {
+  margin: 24px 0;
+  text-align: center;
+}
+
+.feel-slider-value {
+  font-family: "Baloo 2", sans-serif;
+  font-size: 2rem;
+  color: var(--gold-strong);
+  margin-bottom: 10px;
+}
+
+.feel-slider-wrap input[type="range"] {
+  width: 100%;
+  accent-color: var(--rust-strong);
+}
+
+/* Matching game (finale) */
+.match-board {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin: 16px 0;
+}
+
+.match-card {
+  padding: 14px 10px;
+  border-radius: 12px;
+  border: 1px solid var(--card-border);
+  background: var(--bg);
+  text-align: center;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.match-card .icon {
+  font-size: 1.8rem;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.match-card.selected {
+  border-color: var(--gold);
+}
+
+.match-card.matched {
+  border-color: var(--green);
+  background: rgba(124, 179, 121, 0.12);
+  cursor: default;
+  opacity: 0.75;
+}
+
+/* Countdown-Finale */
+.countdown-wrap {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin: 22px 0;
+  flex-wrap: wrap;
+}
+
+.countdown-unit {
+  background: var(--bg);
+  border: 1px solid var(--card-border);
+  border-radius: 14px;
+  padding: 14px 16px;
+  text-align: center;
+  min-width: 70px;
+}
+
+.countdown-unit .value {
+  font-family: "Baloo 2", sans-serif;
+  font-size: 1.8rem;
+  color: var(--gold-strong);
+  display: block;
+}
+
+.countdown-unit .label {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Feedback row */
+.feedback-row {
+  min-height: 1.4em;
+  font-weight: 700;
+  margin: 6px 0 4px;
+}
+
+.feedback-row.correct {
+  color: var(--green);
+}
+
+.feedback-row.wrong {
+  color: var(--red);
+}
+
+footer.credits {
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  opacity: 0.6;
+  margin-top: 24px;
+}
+
+@media (min-width: 560px) {
+  .option-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .match-board {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
