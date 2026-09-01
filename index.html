@@ -74,56 +74,81 @@
       <div class="card" id="screen-p3-card">
         <h2 id="p3-title"></h2>
         <p id="p3-intro"></p>
-        <div class="feel-slider-wrap">
-          <div class="feel-slider-value" id="p3-value">100</div>
-          <input type="range" id="p3-slider" />
+        <div class="tap-wrap">
+          <button class="tap-button" id="p3-tap-btn"></button>
+          <div class="tap-counter" id="p3-counter">0 / 6</div>
         </div>
         <div class="feedback-row" id="p3-feedback"></div>
-        <button class="btn" id="p3-submit">Prüfen</button>
       </div>
     </section>
 
-    <!-- STATION 4: Wortspiel -->
+    <!-- STATION 4: Schritt-Folge merken (Simon-Says) -->
     <section class="screen hidden" id="screen-p4">
       <div class="card" id="screen-p4-card">
         <h2 id="p4-title"></h2>
         <p id="p4-intro"></p>
-        <div class="scrambled-letters" id="p4-scrambled"></div>
-        <div class="puzzle-body">
-          <input type="text" id="p4-input" class="answer-input" placeholder="Deine Antwort" />
-        </div>
+        <div class="sequence-display" id="p4-sequence-display"></div>
+        <div class="option-grid" id="p4-buttons"></div>
         <div class="feedback-row" id="p4-feedback"></div>
-        <button class="btn" id="p4-submit">Prüfen</button>
+        <button class="btn btn-secondary" id="p4-show-btn">Folge nochmal zeigen</button>
       </div>
     </section>
 
-    <!-- STATION 5: Insider-Wissen -->
+    <!-- STATION 5: Wortspiel -->
     <section class="screen hidden" id="screen-p5">
       <div class="card" id="screen-p5-card">
         <h2 id="p5-title"></h2>
         <p id="p5-intro"></p>
-        <div class="option-grid" id="p5-options"></div>
+        <div class="scrambled-letters" id="p5-scrambled"></div>
+        <div class="puzzle-body">
+          <input type="text" id="p5-input" class="answer-input" placeholder="Deine Antwort" />
+        </div>
         <div class="feedback-row" id="p5-feedback"></div>
+        <button class="btn" id="p5-submit">Prüfen</button>
       </div>
     </section>
 
-    <!-- STATION 6: Insider-Wissen -->
+    <!-- STATION 6: Triff den Beat (Reaktionsspiel) -->
     <section class="screen hidden" id="screen-p6">
       <div class="card" id="screen-p6-card">
         <h2 id="p6-title"></h2>
         <p id="p6-intro"></p>
-        <div class="option-grid" id="p6-options"></div>
+        <div class="reaction-track" id="p6-track">
+          <div class="reaction-zone" id="p6-zone"></div>
+          <div class="reaction-marker" id="p6-marker"></div>
+        </div>
         <div class="feedback-row" id="p6-feedback"></div>
+        <button class="btn" id="p6-stop-btn">Stopp</button>
       </div>
     </section>
 
-    <!-- STATION 7: Finale Matching -->
+    <!-- STATION 7: Insider-Wissen -->
     <section class="screen hidden" id="screen-p7">
       <div class="card" id="screen-p7-card">
         <h2 id="p7-title"></h2>
         <p id="p7-intro"></p>
-        <div class="match-board" id="p7-board"></div>
+        <div class="option-grid" id="p7-options"></div>
         <div class="feedback-row" id="p7-feedback"></div>
+      </div>
+    </section>
+
+    <!-- STATION 8: Insider-Wissen -->
+    <section class="screen hidden" id="screen-p8">
+      <div class="card" id="screen-p8-card">
+        <h2 id="p8-title"></h2>
+        <p id="p8-intro"></p>
+        <div class="option-grid" id="p8-options"></div>
+        <div class="feedback-row" id="p8-feedback"></div>
+      </div>
+    </section>
+
+    <!-- STATION 9: Finale Matching -->
+    <section class="screen hidden" id="screen-p9">
+      <div class="card" id="screen-p9-card">
+        <h2 id="p9-title"></h2>
+        <p id="p9-intro"></p>
+        <div class="match-board" id="p9-board"></div>
+        <div class="feedback-row" id="p9-feedback"></div>
       </div>
     </section>
 

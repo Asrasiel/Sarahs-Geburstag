@@ -327,22 +327,85 @@ button {
   background: rgba(209, 100, 87, 0.15);
 }
 
-/* Feingefühl-Slider (BPM) */
-.feel-slider-wrap {
-  margin: 24px 0;
+/* Station 3: Im-Takt-tippen */
+.tap-wrap {
   text-align: center;
+  margin: 26px 0;
 }
 
-.feel-slider-value {
+.tap-button {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  border: none;
+  background: linear-gradient(135deg, var(--rust-strong), var(--rust));
+  color: #fff8ee;
   font-family: "Baloo 2", sans-serif;
-  font-size: 2rem;
-  color: var(--gold-strong);
-  margin-bottom: 10px;
+  font-size: 1.3rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 8px 22px rgba(184, 40, 63, 0.4);
+  transition: transform 0.08s ease;
 }
 
-.feel-slider-wrap input[type="range"] {
-  width: 100%;
-  accent-color: var(--rust-strong);
+.tap-button:active {
+  transform: scale(0.92);
+}
+
+.tap-counter {
+  margin-top: 14px;
+  color: var(--text-dim);
+  font-size: 0.9rem;
+}
+
+/* Station 4: Schritt-Folge merken */
+.sequence-display {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin: 20px 0;
+  min-height: 3rem;
+  font-size: 2.2rem;
+}
+
+.sequence-display .seq-icon {
+  opacity: 0.25;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.sequence-display .seq-icon.lit {
+  opacity: 1;
+  transform: scale(1.2);
+}
+
+/* Station 6: Triff-den-Beat Reaktionsspiel */
+.reaction-track {
+  position: relative;
+  height: 46px;
+  background: var(--bg);
+  border: 1px solid var(--card-border);
+  border-radius: 999px;
+  margin: 24px 0;
+  overflow: hidden;
+}
+
+.reaction-zone {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  background: rgba(124, 179, 121, 0.28);
+  border-left: 2px dashed var(--green);
+  border-right: 2px dashed var(--green);
+}
+
+.reaction-marker {
+  position: absolute;
+  top: 3px;
+  bottom: 3px;
+  width: 6px;
+  border-radius: 3px;
+  background: var(--gold-strong);
+  box-shadow: 0 0 8px rgba(242, 171, 94, 0.8);
 }
 
 /* Matching game (finale) */

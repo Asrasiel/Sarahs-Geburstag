@@ -17,7 +17,7 @@ window.MGR_CONTENT = {
     lines: [
       "Herzlich willkommen zu deiner ganz persönlichen Tanzstunde, Sarah.",
       "Heute geht es nicht um perfekte Schrittfolgen, sondern um Bachata, Salsa, ein bisschen Gefühl und ziemlich viele Erinnerungen an uns beide.",
-      "Sieben Stationen warten auf dich – Quizfragen, Rätsel und ein paar kleine Feingefühl-Aufgaben. Am Ende wartet keine Geschenk-Enthüllung, sondern ein Countdown. Warum, verrate ich dir dort.",
+      "Neun Stationen warten auf dich – Quizfragen, Insider-Wissen und ein paar echte kleine Tanzspiele zum Mitmachen. Am Ende wartet keine Geschenk-Enthüllung, sondern ein Countdown. Warum, verrate ich dir dort.",
       "Bereit für deine Tanzstunde?"
     ],
     button: "Los geht's"
@@ -52,7 +52,7 @@ window.MGR_CONTENT = {
     targetDate: "2026-09-23T00:00:00",
     heading: "Noch nicht ganz...",
     beforeText:
-      "Alle sieben Stationen geschafft – stark! Es gibt aber noch etwas, das ich dir zeigen will. Nur eben noch nicht heute. Komm am 23.09. wieder hierher zurück, dann öffnet sich der letzte Vorhang.",
+      "Alle Stationen geschafft – stark! Es gibt aber noch etwas, das ich dir zeigen will. Nur eben noch nicht heute. Komm am 23.09. wieder hierher zurück, dann öffnet sich der letzte Vorhang.",
     afterHeading: "Der Vorhang öffnet sich",
     // TODO: Hier den tatsächlichen Urlaubs-Teaser/-Reveal eintragen, sobald feststeht,
     // wie viel schon vorher verraten werden soll (Ziel, Datum, Bild, etc.).
@@ -62,7 +62,7 @@ window.MGR_CONTENT = {
   },
 
   // ---------------------------------------------------------------
-  // Die sieben Stationen
+  // Die neun Stationen
   // ---------------------------------------------------------------
   puzzles: [
     {
@@ -89,22 +89,31 @@ window.MGR_CONTENT = {
     },
     {
       id: 3,
-      type: "feel",
-      title: "Station 3 · Feingefühl",
+      type: "rhythm-tap",
+      title: "Station 3 · Im Takt bleiben",
       intro:
-        "Ein typischer Bachata-Song läuft meist irgendwo zwischen 90 und 130 BPM. Stell den Regler so genau wie möglich auf 110 BPM.",
-      inputType: "range",
-      min: 60,
-      max: 160,
-      target: 110,
-      tolerance: 4,
-      reactionsCorrect: ["Guter Instinkt für den Rhythmus.", "Da stimmt das Tempo."],
-      reactionsWrong: ["Noch daneben. Konzentrier dich auf den Takt."]
+        "Kein Quiz, sondern Gefühl: Tipp mehrmals hintereinander im immer gleichen, entspannten Rhythmus auf den Button – so, wie du einen Grundschritt zählen würdest. Die Zahl dahinter verrate ich nicht, es geht nur um deine Gleichmäßigkeit.",
+      tapsNeeded: 6,
+      maxVariation: 0.28,
+      tapButtonLabel: "Tipp",
+      reactionsCorrect: ["Sauber im Takt. Das war gleichmäßig.", "Da wackelt nichts. Guter Rhythmus."],
+      reactionsWrong: ["Das war noch zu unruhig. Nochmal, schön gleichmäßig."]
     },
     {
       id: 4,
+      type: "step-sequence",
+      title: "Station 4 · Schritt-Folge merken",
+      intro: "Schau dir die Schrittfolge genau an, dann tippe sie in der gleichen Reihenfolge nach.",
+      icons: { left: "⬅️", right: "➡️", forward: "⬆️", back: "⬇️" },
+      sequence: ["left", "right", "left", "forward", "back"],
+      showDurationMs: 700,
+      reactionsCorrect: ["Genau diese Reihenfolge. Gut gemerkt."],
+      reactionsWrong: ["Nicht ganz die richtige Reihenfolge. Nochmal von vorn."]
+    },
+    {
+      id: 5,
       type: "wordplay",
-      title: "Station 4 · Buchstabensalat",
+      title: "Station 5 · Buchstabensalat",
       intro: "Bring die Buchstaben in Ordnung – das Wort taucht in praktisch jedem zweiten Bachata-Song auf.",
       scrambled: "C O R A Z O N",
       inputType: "text",
@@ -113,9 +122,20 @@ window.MGR_CONTENT = {
       reactionsWrong: ["Noch nicht. Es ist spanisch für 'Herz'."]
     },
     {
-      id: 5,
+      id: 6,
+      type: "reaction-zone",
+      title: "Station 6 · Triff den Beat",
+      intro: "Der Marker läuft hin und her. Klick auf 'Stopp', wenn er genau in der markierten Zone ist.",
+      zoneStart: 58,
+      zoneEnd: 78,
+      cycleMs: 1500,
+      reactionsCorrect: ["Genau im Beat getroffen.", "Perfektes Timing."],
+      reactionsWrong: ["Knapp daneben. Nochmal versuchen."]
+    },
+    {
+      id: 7,
       type: "personal",
-      title: "Station 5 · Insider-Wissen",
+      title: "Station 7 · Insider-Wissen",
       intro: "Was war Philipps allererstes Geschenk an Sarah?",
       inputType: "choice",
       options: ["Blumen", "Ein Cider", "Ein Ring", "Schokolade"],
@@ -124,9 +144,9 @@ window.MGR_CONTENT = {
       reactionsWrong: ["Nein, aber eine schöne Idee wäre es gewesen."]
     },
     {
-      id: 6,
+      id: 8,
       type: "personal",
-      title: "Station 6 · Insider-Wissen",
+      title: "Station 8 · Insider-Wissen",
       intro: "Was war schon etwas Besonderes, bevor die beiden überhaupt zusammengekommen sind?",
       inputType: "choice",
       options: ["Gemeinsames Kochen", "Lange Umarmungen", "Tägliche Anrufe", "Tanzstunden"],
@@ -135,9 +155,9 @@ window.MGR_CONTENT = {
       reactionsWrong: ["Nein, aber warm hast du trotzdem gedacht."]
     },
     {
-      id: 7,
+      id: 9,
       type: "matching",
-      title: "Station 7 · Die Abschlussprüfung",
+      title: "Station 9 · Die Abschlussprüfung",
       intro: "Letzte Übung. Ordne jeden Begriff dem passenden Symbol zu, um die Tanzstunde abzuschließen.",
       pairs: [
         { icon: "💃", label: "Bachata" },
