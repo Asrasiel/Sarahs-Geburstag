@@ -72,12 +72,12 @@ window.MGR_CONTENT = {
       { src: "assets/photos/photo-concert.jpg", caption: "Irgendeine Band. Wir haben ehrlich gesagt nicht so genau aufgepasst." },
       { src: "assets/photos/photo-northern-lights.jpg", caption: "2000er-Party. Von meiner Frisur reden wir nicht." },
       { src: "assets/photos/photo-cozy.jpg", caption: "Rauchen verboten, Kuscheln nicht – Glück gehabt." },
-      { src: "assets/photos/photo-throwback-party.jpg", caption: "BIG3 Festival, rotes Glitzerhemd. Ich stehe zu meiner Modewahl." },
+      { src: "assets/photos/photo-party-friends.jpg", caption: "BIG3 Festival, diesmal zu dritt unterwegs." },
       { src: "assets/photos/photo-dinopark.jpg", caption: "Vom Dino nicht gefressen worden. Guter Tag." },
       { src: "assets/photos/photo-festival-arena.jpg", caption: "Vor der Zelt-Kathedrale, kurz bevor es angefangen hat zu regnen." },
       { src: "assets/photos/photo-photobooth.jpg", caption: "Dschungel-Photobooth. Die Pflanze links ist sogar echt." },
       { src: "assets/photos/photo-arena-selfie.jpg", caption: "Nach der Show. Die Ohren pfeifen noch ein bisschen." },
-      { src: "assets/photos/photo-party-friends.jpg", caption: "Zu dritt im Pink-Modus, alle überzeugt, gut auszusehen." }
+      { src: "assets/photos/photo-throwback-party.jpg", caption: "Rotes Glitzerhemd, festes Grinsen. Ich stehe zu meiner Modewahl." }
     ]
   },
 
