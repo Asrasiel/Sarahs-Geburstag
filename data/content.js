@@ -17,7 +17,7 @@ window.MGR_CONTENT = {
     lines: [
       "Herzlich willkommen zu deiner ganz persönlichen Tanzstunde, Sarah.",
       "Heute geht es nicht um perfekte Schrittfolgen, sondern um Bachata, Salsa, ein bisschen Gefühl und ziemlich viele Erinnerungen an uns beide.",
-      "Neun Stationen warten auf dich – Quizfragen, Insider-Wissen und ein paar echte kleine Tanzspiele zum Mitmachen. Am Ende wartet keine Geschenk-Enthüllung, sondern ein Countdown. Warum, verrate ich dir dort.",
+      "Vierzehn Stationen warten auf dich – Quizfragen, Insider-Wissen und jede Menge echte kleine Tanzspiele zum Mitmachen. Am Ende wartet keine Geschenk-Enthüllung, sondern ein Countdown. Warum, verrate ich dir dort.",
       "Bereit für deine Tanzstunde?"
     ],
     button: "Los geht's"
@@ -180,8 +180,8 @@ window.MGR_CONTENT = {
     {
       id: 9,
       type: "matching",
-      title: "Station 9 · Die Abschlussprüfung",
-      intro: "Letzte Übung. Ordne jeden Begriff dem passenden Symbol zu, um die Tanzstunde abzuschließen.",
+      title: "Station 9 · Symbole und Bedeutung",
+      intro: "Ordne jeden Begriff dem passenden Symbol zu.",
       pairs: [
         { icon: "💃", label: "Bachata" },
         { icon: "🕺", label: "Salsa" },
@@ -189,8 +189,82 @@ window.MGR_CONTENT = {
         { icon: "🤗", label: "Lange Umarmungen" },
         { icon: "📱", label: "Jodel" }
       ],
-      reactionsCorrect: ["Alle Paare richtig. Die Tanzstunde ist geschafft."],
+      reactionsCorrect: ["Alle Paare richtig."],
       reactionsWrong: ["Das passt noch nicht zusammen."]
+    },
+    {
+      id: 10,
+      type: "flash-tap",
+      title: "Station 10 · Volle Tanzfläche",
+      intro: "Die Tanzfläche ist gerammelt voll. Tipp die Symbole an, bevor sie wieder verschwinden – wer zu viele verpasst, sorgt für einen Tanzunfall.",
+      mode: "floating",
+      symbols: ["💃", "🕺", "⭐"],
+      rounds: 10,
+      showDurationMs: 900,
+      spawnIntervalMs: 750,
+      neededHits: 7,
+      reactionsCorrect: ["Kein Zusammenstoß. Sauber getanzt."],
+      reactionsWrong: ["Autsch, das kracht. Nochmal, diesmal mit mehr Übersicht."]
+    },
+    {
+      id: 11,
+      type: "flash-tap",
+      title: "Station 11 · Schnelle Füße",
+      intro: "In den Feldern blitzen kurz Richtungspfeile auf. Tipp sie an, bevor sie wieder verschwinden.",
+      mode: "slots",
+      slotCount: 6,
+      symbols: ["⬅️", "➡️", "⬆️", "⬇️"],
+      rounds: 10,
+      showDurationMs: 750,
+      spawnIntervalMs: 650,
+      neededHits: 7,
+      reactionsCorrect: ["Schnelle Füße, gut reagiert."],
+      reactionsWrong: ["Zu langsam. Nochmal, diesmal wacher."]
+    },
+    {
+      id: 12,
+      type: "flash-tap",
+      title: "Station 12 · Nicht auf die Füße treten",
+      intro: "Tipp nur die freien Felder (✨) an. Die Füße (🦶) bitte in Ruhe lassen.",
+      mode: "goodbad",
+      goodSymbol: "✨",
+      badSymbol: "🦶",
+      rounds: 10,
+      showDurationMs: 850,
+      spawnIntervalMs: 650,
+      neededScore: 6,
+      reactionsCorrect: ["Niemandem auf die Füße getreten. Vorbildlich."],
+      reactionsWrong: ["Aua, das war ein Fuß. Nochmal, diesmal vorsichtiger."]
+    },
+    {
+      id: 13,
+      type: "matching",
+      title: "Station 13 · Tanzstile-Memory",
+      intro: "Noch eine Runde. Ordne jeden Tanzstil dem passenden Symbol zu.",
+      pairs: [
+        { icon: "🔥", label: "Bachata" },
+        { icon: "🌶️", label: "Salsa" },
+        { icon: "🎷", label: "Merengue" },
+        { icon: "🥁", label: "Reggaeton" },
+        { icon: "✨", label: "Kizomba" }
+      ],
+      reactionsCorrect: ["Alle Stile erkannt."],
+      reactionsWrong: ["Das passt noch nicht zusammen."]
+    },
+    {
+      id: 14,
+      type: "balance",
+      title: "Station 14 · Die letzte Prüfung: Balance halten",
+      intro: "Der Ausschlag wandert langsam zur Seite. Klick auf 'Ausgleichen' (oder drück die Leertaste), sobald er in den roten Bereich kommt, um ihn zurückzudrücken. Halte durch, ohne umzukippen.",
+      durationMs: 12000,
+      tickMs: 120,
+      driftStep: 1.4,
+      flipChance: 0.015,
+      correctionAmount: 20,
+      dangerZone: 22,
+      correctionButtonLabel: "Ausgleichen",
+      reactionsCorrect: ["Stabil geblieben. Kein Umfallen."],
+      reactionsWrong: ["Umgekippt. Nochmal, mit mehr Gefühl fürs Gleichgewicht."]
     }
   ]
 };

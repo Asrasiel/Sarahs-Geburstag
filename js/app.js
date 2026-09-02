@@ -8,6 +8,10 @@
   const LS_SCREEN = "sgb_screen";
   const LS_UNLOCKED = "sgb_unlocked";
 
+  // Spiele mit laufenden Timern (Flash-Tap, Balance) starten erst, wenn ihre
+  // Station wirklich angezeigt wird - nicht schon beim Laden der Seite im Hintergrund.
+  const screenStarters = {};
+
   // ---------------------------------------------------------------
   // Helpers
   // ---------------------------------------------------------------
@@ -33,6 +37,10 @@
 
   function randomFrom(arr) {
     return arr[Math.floor(Math.random() * arr.length)];
+  }
+
+  function prefersReducedMotion() {
+    return window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   }
 
   function getSolved() {
@@ -100,6 +108,9 @@
     }
     if (screen === "countdown") {
       renderCountdown();
+    }
+    if (screenStarters[screen]) {
+      screenStarters[screen]();
     }
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
@@ -473,11 +484,12 @@
   // ---------------------------------------------------------------
   // Station 9: Matching-Finale
   // ---------------------------------------------------------------
-  function initMatchingPuzzle() {
-    const p = C.puzzles.find((x) => x.id === 9);
-    const board = document.getElementById("p9-board");
+  function initMatchingPuzzle(id) {
+    const p = C.puzzles.find((x) => x.id === id);
+    if (!p) return;
+    const board = document.getElementById("p" + id + "-board");
     board.innerHTML = "";
-    const feedback = document.getElementById("p9-feedback");
+    const feedback = document.getElementById("p" + id + "-feedback");
 
     const iconCards = p.pairs.map((pair, i) => ({ kind: "icon", value: pair.icon, pairIndex: i }));
     const labelCards = p.pairs.map((pair, i) => ({ kind: "label", value: pair.label, pairIndex: i }));
@@ -516,16 +528,16 @@
           el.classList.add("matched");
           selected.el.classList.remove("selected");
           matchedCount++;
-          setAnnouncer(reactionFor(9, "correct"), "correct");
+          setAnnouncer(reactionFor(id, "correct"), "correct");
           selected = null;
           if (matchedCount === p.pairs.length) {
             feedback.textContent = "Alle Paare gefunden!";
             feedback.className = "feedback-row correct";
-            markSolved(9);
-            showSolvedButton(9, "screen-p9-card");
+            markSolved(id);
+            showSolvedButton(id, "screen-p" + id + "-card");
           }
         } else {
-          setAnnouncer(reactionFor(9, "wrong"), "wrong");
+          setAnnouncer(reactionFor(id, "wrong"), "wrong");
           const wrongEl = el;
           const wrongSelected = selected.el;
           wrongEl.classList.add("selected");
@@ -548,6 +560,286 @@
       [a[i], a[j]] = [a[j], a[i]];
     }
     return a;
+  }
+
+  // ---------------------------------------------------------------
+  // Chaos- und Jubel-Effekte (Tanzunfall / Erfolg)
+  // ---------------------------------------------------------------
+  function triggerChaos(el) {
+    el.classList.add("chaos");
+    setTimeout(() => el.classList.remove("chaos"), 500);
+  }
+
+  function triggerFlashBurst(emojis) {
+    if (prefersReducedMotion()) return;
+    const layer = document.createElement("div");
+    layer.className = "flash-burst";
+    document.body.appendChild(layer);
+    const count = 40;
+    for (let i = 0; i < count; i++) {
+      const piece = document.createElement("div");
+      piece.className = "flash-burst-emoji";
+      piece.textContent = randomFrom(emojis);
+      piece.style.left = Math.random() * 100 + "vw";
+      piece.style.setProperty("--rot", Math.round(Math.random() * 500 - 250) + "deg");
+      const duration = 1.6 + Math.random() * 1.4;
+      piece.style.animationDuration = duration + "s";
+      piece.style.animationDelay = Math.random() * 0.3 + "s";
+      layer.appendChild(piece);
+    }
+    setTimeout(() => layer.remove(), 3200);
+  }
+
+  // ---------------------------------------------------------------
+  // Flash-Tap-Spiele (Stationen 10-12): Symbole antippen, bevor sie verschwinden
+  // ---------------------------------------------------------------
+  function initFlashTap(id) {
+    const p = C.puzzles.find((x) => x.id === id);
+    if (!p) return;
+    const container = document.getElementById("p" + id + "-floor");
+    const progressEl = document.getElementById("p" + id + "-progress");
+    const feedback = document.getElementById("p" + id + "-feedback");
+    const cardId = "screen-p" + id + "-card";
+    const isSlotted = p.mode === "slots" || p.mode === "goodbad";
+
+    let spawned = 0;
+    let hits = 0;
+    let score = 0;
+    let active = false;
+    let spawnTimer = null;
+    let slots = [];
+
+    function updateProgress() {
+      progressEl.textContent = p.mode === "goodbad" ? "Punkte: " + score : hits + " / " + p.rounds;
+    }
+
+    function setup() {
+      container.innerHTML = "";
+      slots = [];
+      if (isSlotted) {
+        for (let i = 0; i < (p.slotCount || 6); i++) {
+          const slot = document.createElement("div");
+          slot.className = "flash-slot";
+          container.appendChild(slot);
+          slots.push(slot);
+        }
+      }
+    }
+
+    function reset() {
+      spawned = 0;
+      hits = 0;
+      score = 0;
+      feedback.textContent = "";
+      setup();
+      updateProgress();
+    }
+
+    function spawnOne() {
+      if (!active || spawned >= p.rounds) return;
+      let isGood = true;
+      let symbol;
+      if (p.mode === "goodbad") {
+        isGood = Math.random() > 0.4;
+        symbol = isGood ? p.goodSymbol : p.badSymbol;
+      } else {
+        symbol = randomFrom(p.symbols);
+      }
+
+      let target;
+      let removeFn;
+
+      if (p.mode === "floating") {
+        target = document.createElement("button");
+        target.className = "flash-target";
+        target.textContent = symbol;
+        const maxX = Math.max(0, container.clientWidth - 44);
+        const maxY = Math.max(0, container.clientHeight - 44);
+        target.style.left = Math.random() * maxX + "px";
+        target.style.top = Math.random() * maxY + "px";
+        container.appendChild(target);
+        removeFn = () => target.remove();
+      } else {
+        const freeSlots = slots.filter((s) => !s.dataset.occupied);
+        if (freeSlots.length === 0) return;
+        const slot = randomFrom(freeSlots);
+        slot.dataset.occupied = "1";
+        target = document.createElement("button");
+        target.className = "flash-target";
+        target.style.position = "static";
+        target.textContent = symbol;
+        slot.appendChild(target);
+        removeFn = () => {
+          target.remove();
+          delete slot.dataset.occupied;
+        };
+      }
+
+      spawned++;
+      let handled = false;
+      const timeoutId = setTimeout(() => {
+        if (handled) return;
+        handled = true;
+        removeFn();
+        checkEnd();
+      }, p.showDurationMs);
+
+      target.addEventListener("click", () => {
+        if (handled) return;
+        handled = true;
+        clearTimeout(timeoutId);
+        removeFn();
+        if (p.mode === "goodbad") {
+          score += isGood ? 1 : -1;
+        } else {
+          hits++;
+        }
+        updateProgress();
+        checkEnd();
+      });
+    }
+
+    function checkEnd() {
+      updateProgress();
+      if (spawned >= p.rounds) {
+        active = false;
+        clearInterval(spawnTimer);
+        evaluate();
+      }
+    }
+
+    function evaluate() {
+      const passed = p.mode === "goodbad" ? score >= p.neededScore : hits >= p.neededHits;
+      if (passed) {
+        feedback.textContent = "Geschafft!";
+        feedback.className = "feedback-row correct";
+        setAnnouncer(reactionFor(id, "correct"), "correct");
+        triggerFlashBurst(["🎉", "✨", "💃", "🕺", "🪩"]);
+        markSolved(id);
+        showSolvedButton(id, cardId);
+      } else {
+        feedback.textContent = "Tanzunfall! Nochmal von vorn.";
+        feedback.className = "feedback-row wrong";
+        setAnnouncer(reactionFor(id, "wrong"), "wrong");
+        triggerChaos(container);
+        setTimeout(() => {
+          reset();
+          active = true;
+          spawnTimer = setInterval(spawnOne, p.spawnIntervalMs);
+        }, 900);
+      }
+    }
+
+    screenStarters["p" + id] = function () {
+      clearInterval(spawnTimer);
+      reset();
+      active = true;
+      spawnTimer = setInterval(spawnOne, p.spawnIntervalMs);
+    };
+  }
+
+  // ---------------------------------------------------------------
+  // Balance-Spiel (Station 14): per Klick oder Leertaste ausgleichen
+  // ---------------------------------------------------------------
+  function initBalanceGame(id) {
+    const p = C.puzzles.find((x) => x.id === id);
+    if (!p) return;
+    const marker = document.getElementById("p" + id + "-marker");
+    const zoneLeft = document.getElementById("p" + id + "-zone-left");
+    const zoneRight = document.getElementById("p" + id + "-zone-right");
+    const feedback = document.getElementById("p" + id + "-feedback");
+    const correctBtn = document.getElementById("p" + id + "-correct-btn");
+    correctBtn.textContent = p.correctionButtonLabel;
+
+    zoneLeft.style.width = p.dangerZone + "%";
+    zoneRight.style.width = p.dangerZone + "%";
+
+    let position = 50;
+    let direction = Math.random() > 0.5 ? 1 : -1;
+    let tickTimer = null;
+    let startTime = null;
+    let running = false;
+
+    function inDanger() {
+      return position <= p.dangerZone || position >= 100 - p.dangerZone;
+    }
+
+    function renderMarker() {
+      marker.style.left = position + "%";
+    }
+
+    function correct() {
+      if (!running || !inDanger()) return;
+      position += position < 50 ? p.correctionAmount : -p.correctionAmount;
+      position = Math.max(4, Math.min(96, position));
+      direction = position < 50 ? 1 : -1;
+      renderMarker();
+    }
+
+    function fall() {
+      running = false;
+      clearInterval(tickTimer);
+      marker.classList.add("falling");
+      feedback.textContent = "Umgekippt!";
+      feedback.className = "feedback-row wrong";
+      setAnnouncer(reactionFor(id, "wrong"), "wrong");
+      setTimeout(() => {
+        marker.classList.remove("falling");
+        startGame();
+      }, 1200);
+    }
+
+    function succeed() {
+      running = false;
+      clearInterval(tickTimer);
+      feedback.textContent = "Geschafft!";
+      feedback.className = "feedback-row correct";
+      setAnnouncer(reactionFor(id, "correct"), "correct");
+      triggerFlashBurst(["🎉", "✨", "💃", "🕺"]);
+      markSolved(id);
+      showSolvedButton(id, "screen-p" + id + "-card");
+    }
+
+    function tick() {
+      if (!running) return;
+      position += direction * p.driftStep;
+      if (Math.random() < p.flipChance) direction *= -1;
+      if (position <= 0 || position >= 100) {
+        position = Math.max(0, Math.min(100, position));
+        renderMarker();
+        fall();
+        return;
+      }
+      renderMarker();
+      if (Date.now() - startTime >= p.durationMs) {
+        succeed();
+        return;
+      }
+    }
+
+    function startGame() {
+      position = 50;
+      direction = Math.random() > 0.5 ? 1 : -1;
+      running = true;
+      startTime = Date.now();
+      feedback.textContent = "";
+      renderMarker();
+      clearInterval(tickTimer);
+      tickTimer = setInterval(tick, p.tickMs);
+    }
+
+    correctBtn.addEventListener("click", correct);
+    document.addEventListener("keydown", (e) => {
+      if (e.code === "Space" && currentScreen() === "p" + id) {
+        e.preventDefault();
+        correct();
+      }
+    });
+
+    screenStarters["p" + id] = function () {
+      clearInterval(tickTimer);
+      startGame();
+    };
   }
 
   // ---------------------------------------------------------------
@@ -659,7 +951,12 @@
     initReactionZone();
     initChoicePuzzle(7);
     initChoicePuzzle(8);
-    initMatchingPuzzle();
+    initMatchingPuzzle(9);
+    initFlashTap(10);
+    initFlashTap(11);
+    initFlashTap(12);
+    initMatchingPuzzle(13);
+    initBalanceGame(14);
     initPasswordGate();
   });
 })();

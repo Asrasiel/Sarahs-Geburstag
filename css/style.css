@@ -566,3 +566,159 @@ footer.credits {
     grid-template-columns: 1fr;
   }
 }
+
+/* Flash-Tap-Spiele (Stationen 10-12) */
+.flash-floor {
+  position: relative;
+  width: 100%;
+  height: 260px;
+  background: var(--bg);
+  border: 1px solid var(--card-border);
+  border-radius: 14px;
+  overflow: hidden;
+  margin: 18px 0 10px;
+}
+
+.flash-slots {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin: 18px 0 10px;
+}
+
+.flash-slot {
+  position: relative;
+  aspect-ratio: 1;
+  background: var(--bg);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  cursor: pointer;
+}
+
+.flash-target {
+  position: absolute;
+  font-size: 2rem;
+  line-height: 1;
+  cursor: pointer;
+  user-select: none;
+  animation: flash-pop 0.15s ease;
+  background: none;
+  border: none;
+  padding: 6px;
+}
+
+@keyframes flash-pop {
+  from {
+    transform: scale(0.4);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.flash-progress {
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  margin-bottom: 6px;
+}
+
+.flash-floor.chaos,
+.flash-slots.chaos {
+  animation: floor-shake 0.5s ease;
+}
+
+@keyframes floor-shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-8px) rotate(-1deg); }
+  40% { transform: translateX(8px) rotate(1deg); }
+  60% { transform: translateX(-6px) rotate(-1deg); }
+  80% { transform: translateX(6px) rotate(1deg); }
+}
+
+.flash-burst {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 60;
+  overflow: hidden;
+}
+
+.flash-burst-emoji {
+  position: absolute;
+  top: -10%;
+  font-size: 1.8rem;
+  animation-name: flash-burst-fall;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+}
+
+@keyframes flash-burst-fall {
+  to {
+    transform: translateY(120vh) rotate(var(--rot, 360deg));
+    opacity: 0.15;
+  }
+}
+
+/* Balance-Spiel (Station 14) */
+.balance-track {
+  position: relative;
+  height: 56px;
+  background: var(--bg);
+  border: 1px solid var(--card-border);
+  border-radius: 999px;
+  margin: 24px 0;
+  overflow: hidden;
+}
+
+.balance-zone {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  background: rgba(209, 100, 87, 0.28);
+}
+
+.balance-zone-left {
+  left: 0;
+  border-right: 2px dashed var(--red);
+}
+
+.balance-zone-right {
+  right: 0;
+  border-left: 2px dashed var(--red);
+}
+
+.balance-center-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 2px;
+  background: var(--green);
+  opacity: 0.5;
+}
+
+.balance-marker {
+  position: absolute;
+  top: 50%;
+  font-size: 1.6rem;
+  transform: translate(-50%, -50%);
+  transition: left 0.12s linear;
+}
+
+.balance-marker.falling {
+  animation: balance-fall 0.6s ease forwards;
+}
+
+@keyframes balance-fall {
+  to {
+    transform: translate(-50%, -50%) rotate(90deg) scale(0.8);
+    opacity: 0.3;
+  }
+}

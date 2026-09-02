@@ -6,7 +6,7 @@
 <title>Sarahs Tanzstunde</title>
 <meta name="robots" content="noindex, nofollow" />
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💃</text></svg>" />
-<link rel="stylesheet" href="css/style.css?v=7" />
+<link rel="stylesheet" href="css/style.css?v=8" />
 <script type="module" src="https://unpkg.com/@google/model-viewer@3.5.0/dist/model-viewer.min.js"></script>
 </head>
 <body>
@@ -204,13 +204,72 @@
       </div>
     </section>
 
-    <!-- STATION 9: Finale Matching -->
+    <!-- STATION 9: Matching -->
     <section class="screen hidden" id="screen-p9">
       <div class="card" id="screen-p9-card">
         <h2 id="p9-title"></h2>
         <p id="p9-intro"></p>
         <div class="match-board" id="p9-board"></div>
         <div class="feedback-row" id="p9-feedback"></div>
+      </div>
+    </section>
+
+    <!-- STATION 10: Volle Tanzfläche (Flash-Tap, frei schwebend) -->
+    <section class="screen hidden" id="screen-p10">
+      <div class="card" id="screen-p10-card">
+        <h2 id="p10-title"></h2>
+        <p id="p10-intro"></p>
+        <div class="flash-floor" id="p10-floor"></div>
+        <div class="flash-progress" id="p10-progress">0 / 10</div>
+        <div class="feedback-row" id="p10-feedback"></div>
+      </div>
+    </section>
+
+    <!-- STATION 11: Schnelle Füße (Flash-Tap, feste Felder) -->
+    <section class="screen hidden" id="screen-p11">
+      <div class="card" id="screen-p11-card">
+        <h2 id="p11-title"></h2>
+        <p id="p11-intro"></p>
+        <div class="flash-slots" id="p11-floor"></div>
+        <div class="flash-progress" id="p11-progress">0 / 10</div>
+        <div class="feedback-row" id="p11-feedback"></div>
+      </div>
+    </section>
+
+    <!-- STATION 12: Nicht auf die Füße treten (Flash-Tap, gut/schlecht) -->
+    <section class="screen hidden" id="screen-p12">
+      <div class="card" id="screen-p12-card">
+        <h2 id="p12-title"></h2>
+        <p id="p12-intro"></p>
+        <div class="flash-slots" id="p12-floor"></div>
+        <div class="flash-progress" id="p12-progress">0 / 10</div>
+        <div class="feedback-row" id="p12-feedback"></div>
+      </div>
+    </section>
+
+    <!-- STATION 13: Tanzstile-Memory -->
+    <section class="screen hidden" id="screen-p13">
+      <div class="card" id="screen-p13-card">
+        <h2 id="p13-title"></h2>
+        <p id="p13-intro"></p>
+        <div class="match-board" id="p13-board"></div>
+        <div class="feedback-row" id="p13-feedback"></div>
+      </div>
+    </section>
+
+    <!-- STATION 14: Balance halten -->
+    <section class="screen hidden" id="screen-p14">
+      <div class="card" id="screen-p14-card">
+        <h2 id="p14-title"></h2>
+        <p id="p14-intro"></p>
+        <div class="balance-track" id="p14-track">
+          <div class="balance-zone balance-zone-left" id="p14-zone-left"></div>
+          <div class="balance-zone balance-zone-right" id="p14-zone-right"></div>
+          <div class="balance-center-line"></div>
+          <div class="balance-marker" id="p14-marker">🕺</div>
+        </div>
+        <div class="feedback-row" id="p14-feedback"></div>
+        <button class="btn" id="p14-correct-btn"></button>
       </div>
     </section>
 
@@ -270,7 +329,7 @@
   </footer>
 </div>
 
-<script src="data/content.js?v=7"></script>
-<script src="js/app.js?v=7"></script>
+<script src="data/content.js?v=8"></script>
+<script src="js/app.js?v=8"></script>
 </body>
 </html>
