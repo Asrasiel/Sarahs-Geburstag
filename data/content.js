@@ -68,16 +68,16 @@ window.MGR_CONTENT = {
   gallery: {
     heading: "ein paar Erinnerungen",
     photos: [
-      { src: "assets/photos/photo-big3-festival.jpg", caption: "BIG3 Festival – aufgetakelt und gut gelaunt." },
-      { src: "assets/photos/photo-concert.jpg", caption: "Ein Abend, viele Lichter." },
-      { src: "assets/photos/photo-northern-lights.jpg", caption: "Nordlichter und ein Kuss." },
-      { src: "assets/photos/photo-cozy.jpg", caption: "Gemütlich, wie es sein soll." },
-      { src: "assets/photos/photo-throwback-party.jpg", caption: "2000s Throwback Night." },
-      { src: "assets/photos/photo-dinopark.jpg", caption: "Abenteuer im Dinopark." },
-      { src: "assets/photos/photo-festival-arena.jpg", caption: "Festival-Stimmung pur." },
-      { src: "assets/photos/photo-photobooth.jpg", caption: "Photobooth-Quatsch, Dschungel-Edition." },
-      { src: "assets/photos/photo-arena-selfie.jpg", caption: "Nach der Show, noch ganz benommen." },
-      { src: "assets/photos/photo-party-friends.jpg", caption: "Mit Freunden im rosa Licht." }
+      { src: "assets/photos/photo-big3-festival.jpg", caption: "Nordlichter im Hintergrund, Knutschen im Vordergrund. Prioritäten." },
+      { src: "assets/photos/photo-concert.jpg", caption: "Irgendeine Band. Wir haben ehrlich gesagt nicht so genau aufgepasst." },
+      { src: "assets/photos/photo-northern-lights.jpg", caption: "2000er-Party. Von meiner Frisur reden wir nicht." },
+      { src: "assets/photos/photo-cozy.jpg", caption: "Rauchen verboten, Kuscheln nicht – Glück gehabt." },
+      { src: "assets/photos/photo-throwback-party.jpg", caption: "BIG3 Festival, rotes Glitzerhemd. Ich stehe zu meiner Modewahl." },
+      { src: "assets/photos/photo-dinopark.jpg", caption: "Vom Dino nicht gefressen worden. Guter Tag." },
+      { src: "assets/photos/photo-festival-arena.jpg", caption: "Vor der Zelt-Kathedrale, kurz bevor es angefangen hat zu regnen." },
+      { src: "assets/photos/photo-photobooth.jpg", caption: "Dschungel-Photobooth. Die Pflanze links ist sogar echt." },
+      { src: "assets/photos/photo-arena-selfie.jpg", caption: "Nach der Show. Die Ohren pfeifen noch ein bisschen." },
+      { src: "assets/photos/photo-party-friends.jpg", caption: "Zu dritt im Pink-Modus, alle überzeugt, gut auszusehen." }
     ]
   },
 
