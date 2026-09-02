@@ -6,10 +6,61 @@
 <title>Sarahs Tanzstunde</title>
 <meta name="robots" content="noindex, nofollow" />
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💃</text></svg>" />
-<link rel="stylesheet" href="css/style.css?v=6" />
+<link rel="stylesheet" href="css/style.css?v=7" />
 <script type="module" src="https://unpkg.com/@google/model-viewer@3.5.0/dist/model-viewer.min.js"></script>
 </head>
 <body>
+
+<!-- Unsichtbarer Hintergrundmusik-Player (YouTube), startet stumm, entstummt beim ersten Klick -->
+<div style="position:fixed;left:-9999px;top:-9999px;width:300px;height:169px;" aria-hidden="true">
+  <div id="yt-player"></div>
+</div>
+<script>
+  // Muss VOR dem YouTube-API-Skript definiert werden, sonst verpasst YouTube den Callback
+  window.__ytPlayer = null;
+  window.__ytMusicUnlocked = false;
+
+  window.onYouTubeIframeAPIReady = function () {
+    window.__ytPlayer = new YT.Player("yt-player", {
+      videoId: "SEjw5rdyvVg",
+      playerVars: {
+        autoplay: 1,
+        mute: 1,
+        loop: 1,
+        playlist: "SEjw5rdyvVg",
+        controls: 0,
+        disablekb: 1,
+        fs: 0,
+        modestbranding: 1
+      },
+      events: {
+        onReady: function (e) {
+          e.target.playVideo();
+          if (window.__updateMusicToggleLabel) window.__updateMusicToggleLabel();
+        }
+      }
+    });
+  };
+
+  window.__tryAutoUnmuteMusic = function () {
+    var p = window.__ytPlayer;
+    if (window.__ytMusicUnlocked || !p || typeof p.unMute !== "function") return;
+    window.__ytMusicUnlocked = true;
+    try {
+      p.unMute();
+      p.setVolume(40);
+      setTimeout(function () {
+        if (window.__updateMusicToggleLabel) window.__updateMusicToggleLabel();
+      }, 400);
+    } catch (e) {
+      /* Player evtl. noch nicht bereit, kein Problem */
+    }
+  };
+
+  document.addEventListener("click", window.__tryAutoUnmuteMusic, { once: true });
+  document.addEventListener("keydown", window.__tryAutoUnmuteMusic, { once: true });
+</script>
+<script src="https://www.youtube.com/iframe_api"></script>
 
 <!-- ================= PASSWORT-SCREEN ================= -->
 <div id="password-screen">
@@ -214,10 +265,12 @@
     gebastelt mit Rhythmus und viel Liebe
     <br />
     <a href="#" id="reset-link" style="color:inherit;text-decoration:underline;">Von vorne beginnen</a>
+    <br />
+    <button class="btn btn-secondary" id="music-toggle" style="margin-top:10px;padding:6px 16px;font-size:0.85rem;">🔇 Musik an</button>
   </footer>
 </div>
 
-<script src="data/content.js?v=6"></script>
-<script src="js/app.js?v=6"></script>
+<script src="data/content.js?v=7"></script>
+<script src="js/app.js?v=7"></script>
 </body>
 </html>

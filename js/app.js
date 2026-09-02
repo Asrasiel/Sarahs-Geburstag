@@ -602,6 +602,35 @@
     });
   }
 
+  // ---------------------------------------------------------------
+  // Hintergrundmusik (YouTube, unsichtbar, startet stumm)
+  // Der eigentliche Player wird in index.html initialisiert (muss vor dem
+  // YouTube-API-Skript-Tag stehen), hier nur Button-Anzeige und -Klick.
+  // ---------------------------------------------------------------
+  function updateMusicToggleLabel() {
+    const btn = document.getElementById("music-toggle");
+    const p = window.__ytPlayer;
+    if (!btn || !p || typeof p.isMuted !== "function") return;
+    btn.textContent = p.isMuted() ? "🔇 Musik an" : "🔊 Musik aus";
+  }
+  window.__updateMusicToggleLabel = updateMusicToggleLabel;
+
+  function initMusicToggle() {
+    document.getElementById("music-toggle").addEventListener("click", () => {
+      const p = window.__ytPlayer;
+      if (!p) return;
+      window.__ytMusicUnlocked = true;
+      if (p.isMuted()) {
+        p.unMute();
+        p.setVolume(40);
+      } else {
+        p.mute();
+      }
+      // isMuted() spiegelt den neuen Zustand erst nach kurzer Verzögerung wider
+      setTimeout(updateMusicToggleLabel, 400);
+    });
+  }
+
   function initReset() {
     document.getElementById("reset-link").addEventListener("click", function (e) {
       e.preventDefault();
@@ -621,6 +650,7 @@
     initWelcome();
     initReset();
     initCountdownPeek();
+    initMusicToggle();
     initChoicePuzzle(1);
     initChoicePuzzle(2);
     initRhythmTap();
