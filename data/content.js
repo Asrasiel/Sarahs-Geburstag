@@ -71,7 +71,11 @@ window.MGR_CONTENT = {
       { src: "assets/photos/photo-northern-lights.jpg", caption: "Nordlichter und ein Kuss." },
       { src: "assets/photos/photo-cozy.jpg", caption: "Gemütlich, wie es sein soll." },
       { src: "assets/photos/photo-throwback-party.jpg", caption: "2000s Throwback Night." },
-      { src: "assets/photos/photo-dinopark.jpg", caption: "Abenteuer im Dinopark." }
+      { src: "assets/photos/photo-dinopark.jpg", caption: "Abenteuer im Dinopark." },
+      { src: "assets/photos/photo-festival-arena.jpg", caption: "Festival-Stimmung pur." },
+      { src: "assets/photos/photo-photobooth.jpg", caption: "Photobooth-Quatsch, Dschungel-Edition." },
+      { src: "assets/photos/photo-arena-selfie.jpg", caption: "Nach der Show, noch ganz benommen." },
+      { src: "assets/photos/photo-party-friends.jpg", caption: "Mit Freunden im rosa Licht." }
     ]
   },
 
@@ -94,12 +98,12 @@ window.MGR_CONTENT = {
       id: 2,
       type: "personal",
       title: "Station 2 · Insider-Wissen",
-      intro: "Persönliche Frage: Wo haben Philipp und Sarah sich eigentlich kennengelernt?",
+      intro: "So, Sarah, kleiner Gedächtnistest: Weißt du eigentlich noch, wo wir uns kennengelernt haben? Ich frag ja nur.",
       inputType: "choice",
       options: ["Tinder", "Jodel", "Im Tanzkurs", "Auf einer Hochzeit"],
       answer: "Jodel",
-      reactionsCorrect: ["Genau. Manchmal reicht eine App und der richtige Moment."],
-      reactionsWrong: ["Nein. Denk an eine ziemlich anonyme App."]
+      reactionsCorrect: ["Na also, geht doch. Manchmal reicht eine anonyme App und der richtige Moment."],
+      reactionsWrong: ["Falsch geraten, Sarah. Tipp: eine ziemlich anonyme App."]
     },
     {
       id: 3,
@@ -153,23 +157,23 @@ window.MGR_CONTENT = {
       id: 7,
       type: "personal",
       title: "Station 7 · Insider-Wissen",
-      intro: "Was war Philipps allererstes Geschenk an Sarah?",
+      intro: "Nächste Runde, Sarah: Weißt du noch, was mein allererstes Geschenk an dich war? Ich hab's jedenfalls nicht vergessen.",
       inputType: "choice",
       options: ["Blumen", "Ein Cider", "Ein Ring", "Schokolade"],
       answer: "Ein Cider",
-      reactionsCorrect: ["Genau richtig. Ein Klassiker."],
-      reactionsWrong: ["Nein, aber eine schöne Idee wäre es gewesen."]
+      reactionsCorrect: ["Ganz genau. Ein Klassiker eben."],
+      reactionsWrong: ["Nein, Sarah. Aber eine schöne Idee wäre es auch gewesen."]
     },
     {
       id: 8,
       type: "personal",
       title: "Station 8 · Insider-Wissen",
-      intro: "Was war schon etwas Besonderes, bevor die beiden überhaupt zusammengekommen sind?",
+      intro: "Ganz ehrlich, Sarah: Was war eigentlich schon besonders, bevor wir überhaupt zusammengekommen sind?",
       inputType: "choice",
       options: ["Gemeinsames Kochen", "Lange Umarmungen", "Tägliche Anrufe", "Tanzstunden"],
       answer: "Lange Umarmungen",
       reactionsCorrect: ["Richtig. Manche Dinge kündigen sich einfach an."],
-      reactionsWrong: ["Nein, aber warm hast du trotzdem gedacht."]
+      reactionsWrong: ["Nein, Sarah. Aber warm hast du trotzdem gedacht."]
     },
     {
       id: 9,

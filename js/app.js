@@ -305,13 +305,37 @@
   function initStepSequence() {
     const p = C.puzzles.find((x) => x.id === 4);
     const display = document.getElementById("p4-sequence-display");
+    const userInputDisplay = document.getElementById("p4-user-input");
     const buttonsWrap = document.getElementById("p4-buttons");
     const feedback = document.getElementById("p4-feedback");
     const showBtn = document.getElementById("p4-show-btn");
+    const clearBtn = document.getElementById("p4-clear-btn");
     const keys = Object.keys(p.icons);
 
     let userProgress = 0;
     let showing = false;
+    let userSlots = [];
+
+    function buildUserSlots() {
+      userInputDisplay.innerHTML = "";
+      userSlots = p.sequence.map(() => {
+        const span = document.createElement("span");
+        span.className = "seq-icon";
+        span.textContent = "•";
+        userInputDisplay.appendChild(span);
+        return span;
+      });
+    }
+    buildUserSlots();
+
+    function clearUserInput() {
+      userProgress = 0;
+      userSlots.forEach((slot) => {
+        slot.textContent = "•";
+        slot.classList.remove("lit");
+      });
+      feedback.textContent = "";
+    }
 
     buttonsWrap.innerHTML = "";
     keys.forEach((key) => {
@@ -321,6 +345,8 @@
       btn.addEventListener("click", () => {
         if (showing) return;
         if (p.sequence[userProgress] === key) {
+          userSlots[userProgress].textContent = p.icons[key];
+          userSlots[userProgress].classList.add("lit");
           userProgress++;
           if (userProgress === p.sequence.length) {
             feedback.textContent = "Richtig!";
@@ -333,15 +359,17 @@
           feedback.textContent = "Noch nicht.";
           feedback.className = "feedback-row wrong";
           setAnnouncer(reactionFor(4, "wrong"), "wrong");
-          userProgress = 0;
+          clearUserInput();
         }
       });
       buttonsWrap.appendChild(btn);
     });
 
+    clearBtn.addEventListener("click", clearUserInput);
+
     function playSequence() {
       showing = true;
-      userProgress = 0;
+      clearUserInput();
       display.innerHTML = "";
       const slots = p.sequence.map(() => {
         const span = document.createElement("span");
