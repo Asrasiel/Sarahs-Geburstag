@@ -58,7 +58,9 @@ window.MGR_CONTENT = {
     // wie viel schon vorher verraten werden soll (Ziel, Datum, Bild, etc.).
     afterText:
       "Der Tag ist da. Also: wir fahren zusammen weg. Wohin genau, verrate ich dir jetzt persönlich – dieser Text hier ist nur der Rahmen dafür.",
-    reopenNote: "Schau nach dem 23.09. einfach nochmal auf dieser Seite vorbei."
+    reopenNote: "Schau nach dem 23.09. einfach nochmal auf dieser Seite vorbei.",
+    peekButtonLabel: "👀 Jetzt schon gucken?",
+    peekMessage: "Nette Idee. Die Überraschung wird am 23.09. aufgedeckt – vorher nicht."
   },
 
   // Foto-Galerie, erscheint nach dem Countdown

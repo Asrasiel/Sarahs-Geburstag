@@ -168,6 +168,7 @@
     document.getElementById("countdown-reopen-note").textContent = C.countdown.reopenNote;
     document.getElementById("countdown-after-heading").textContent = C.countdown.afterHeading;
     document.getElementById("countdown-after-text").textContent = C.countdown.afterText;
+    document.getElementById("countdown-peek-btn").textContent = C.countdown.peekButtonLabel;
 
     document.getElementById("gallery-heading").textContent = C.gallery.heading;
     const galleryWrap = document.getElementById("photo-gallery");
@@ -558,6 +559,7 @@
     const reopenNote = document.getElementById("countdown-reopen-note");
     const wrap = document.getElementById("countdown-wrap");
     const after = document.getElementById("countdown-after");
+    const peekWrap = document.getElementById("countdown-peek-wrap");
 
     function tick() {
       const now = Date.now();
@@ -566,6 +568,7 @@
         wrap.classList.add("hidden");
         beforeText.classList.add("hidden");
         reopenNote.classList.add("hidden");
+        peekWrap.classList.add("hidden");
         after.classList.remove("hidden");
         if (countdownTimer) {
           clearInterval(countdownTimer);
@@ -576,6 +579,7 @@
       wrap.classList.remove("hidden");
       beforeText.classList.remove("hidden");
       reopenNote.classList.remove("hidden");
+      peekWrap.classList.remove("hidden");
       after.classList.add("hidden");
 
       const seconds = Math.floor(diff / 1000);
@@ -592,6 +596,12 @@
   // ---------------------------------------------------------------
   // Reset
   // ---------------------------------------------------------------
+  function initCountdownPeek() {
+    document.getElementById("countdown-peek-btn").addEventListener("click", () => {
+      document.getElementById("countdown-peek-feedback").textContent = C.countdown.peekMessage;
+    });
+  }
+
   function initReset() {
     document.getElementById("reset-link").addEventListener("click", function (e) {
       e.preventDefault();
@@ -610,6 +620,7 @@
     populateStaticText();
     initWelcome();
     initReset();
+    initCountdownPeek();
     initChoicePuzzle(1);
     initChoicePuzzle(2);
     initRhythmTap();
