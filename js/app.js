@@ -168,6 +168,21 @@
     document.getElementById("countdown-reopen-note").textContent = C.countdown.reopenNote;
     document.getElementById("countdown-after-heading").textContent = C.countdown.afterHeading;
     document.getElementById("countdown-after-text").textContent = C.countdown.afterText;
+
+    document.getElementById("gallery-heading").textContent = C.gallery.heading;
+    const galleryWrap = document.getElementById("photo-gallery");
+    galleryWrap.innerHTML = "";
+    C.gallery.photos.forEach((photo) => {
+      const fig = document.createElement("figure");
+      const img = document.createElement("img");
+      img.src = photo.src;
+      img.alt = photo.caption;
+      const cap = document.createElement("figcaption");
+      cap.textContent = photo.caption;
+      fig.appendChild(img);
+      fig.appendChild(cap);
+      galleryWrap.appendChild(fig);
+    });
   }
 
   // ---------------------------------------------------------------

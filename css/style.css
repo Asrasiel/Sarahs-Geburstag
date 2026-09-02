@@ -507,3 +507,62 @@ footer.credits {
     grid-template-columns: repeat(2, 1fr);
   }
 }
+
+/* Sketchfab / 3D-Modell-Embeds */
+.sketchfab-embed-wrap {
+  position: relative;
+  width: 100%;
+  padding-top: 66%;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid var(--card-border);
+  background: var(--bg);
+}
+
+.sketchfab-embed-wrap iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.model-credit {
+  font-size: 0.78rem;
+  color: var(--text-dim);
+  margin: 8px 0 0;
+}
+
+/* Foto-Galerie */
+.photo-gallery {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 16px 0;
+}
+
+.photo-gallery figure {
+  margin: 0;
+}
+
+.photo-gallery img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 1px solid var(--card-border);
+  display: block;
+}
+
+.photo-gallery figcaption {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  text-align: center;
+  margin-top: 6px;
+}
+
+@media (max-width: 420px) {
+  .photo-gallery {
+    grid-template-columns: 1fr;
+  }
+}

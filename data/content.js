@@ -61,6 +61,20 @@ window.MGR_CONTENT = {
     reopenNote: "Schau nach dem 23.09. einfach nochmal auf dieser Seite vorbei."
   },
 
+  // Foto-Galerie, erscheint nach dem Countdown
+  // TODO: Bildunterschriften gerne durch genauere Erinnerungen (Ort, Datum, Anlass) ersetzen.
+  gallery: {
+    heading: "ein paar Erinnerungen",
+    photos: [
+      { src: "assets/photos/photo-big3-festival.jpg", caption: "BIG3 Festival – aufgetakelt und gut gelaunt." },
+      { src: "assets/photos/photo-concert.jpg", caption: "Ein Abend, viele Lichter." },
+      { src: "assets/photos/photo-northern-lights.jpg", caption: "Nordlichter und ein Kuss." },
+      { src: "assets/photos/photo-cozy.jpg", caption: "Gemütlich, wie es sein soll." },
+      { src: "assets/photos/photo-throwback-party.jpg", caption: "2000s Throwback Night." },
+      { src: "assets/photos/photo-dinopark.jpg", caption: "Abenteuer im Dinopark." }
+    ]
+  },
+
   // ---------------------------------------------------------------
   // Die neun Stationen
   // ---------------------------------------------------------------
