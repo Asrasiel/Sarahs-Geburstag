@@ -92,12 +92,15 @@ window.MGR_CONTENT = {
       type: "rhythm-tap",
       title: "Station 3 · Im Takt bleiben",
       intro:
-        "Kein Quiz, sondern Gefühl: Tipp mehrmals hintereinander im immer gleichen, entspannten Rhythmus auf den Button – so, wie du einen Grundschritt zählen würdest. Die Zahl dahinter verrate ich nicht, es geht nur um deine Gleichmäßigkeit.",
-      tapsNeeded: 6,
-      maxVariation: 0.28,
+        "Tipp den Salsa-Grundtakt: '1-2-3, 5-6-7' – schnell, schnell, schnell, kurze Pause, schnell, schnell, schnell, kurze Pause. Also 8-mal tippen, wobei der Schritt zur 4 und zur 8 jeweils etwas länger auf sich warten lässt als die anderen.",
+      tapsNeeded: 8,
+      slowIndexes: [2, 6],
+      maxBaseVariation: 0.3,
+      slowMinRatio: 1.35,
+      slowMaxRatio: 3.0,
       tapButtonLabel: "Tipp",
-      reactionsCorrect: ["Sauber im Takt. Das war gleichmäßig.", "Da wackelt nichts. Guter Rhythmus."],
-      reactionsWrong: ["Das war noch zu unruhig. Nochmal, schön gleichmäßig."]
+      reactionsCorrect: ["Sauber im Salsa-Takt.", "Da stimmt die Pause auf 4 und 8."],
+      reactionsWrong: ["Noch nicht ganz – 1,2,3 gleichmäßig, kurze Pause, 5,6,7 gleichmäßig, kurze Pause. Nochmal."]
     },
     {
       id: 4,

@@ -220,10 +220,10 @@
 
   <section class="card game-section">
     <h2>🥁 Tanz mit!</h2>
-    <p>Schau dir an, wie die beiden sich bewegen, und tipp im gleichen ruhigen Rhythmus mit. Es kommt nur auf die Gleichmäßigkeit an, nicht auf Tempo.</p>
+    <p>Tipp den Salsa-Grundtakt mit: "1-2-3, 5-6-7" – schnell, schnell, schnell, kurze Pause, schnell, schnell, schnell, kurze Pause. Tipp also 8-mal, wobei der Schritt zur 4 und zur 8 jeweils etwas länger auf sich warten lässt als die anderen.</p>
     <div class="tap-wrap">
       <button class="tap-button" id="tap-btn">Tipp</button>
-      <div class="tap-counter" id="tap-counter">0 / 6</div>
+      <div class="tap-counter" id="tap-counter">0 / 8</div>
     </div>
     <div class="feedback-row" id="tap-feedback"></div>
   </section>
@@ -243,10 +243,15 @@
 </div>
 
 <script>
-  // --- Spiel 1: Tanz mit! (Rhythmus-Tippen, keine Zahl wird verraten) ---
+  // --- Spiel 1: Tanz mit! (Salsa-Grundtakt "1-2-3, 5-6-7" mit Pause auf 4 und 8) ---
   (function () {
-    const TAPS_NEEDED = 6;
-    const MAX_VARIATION = 0.28;
+    const TAPS_NEEDED = 8;
+    // Intervall-Indizes (0-basiert) zwischen den 8 Tipps: idx2 = Übergang zur 4, idx6 = Übergang zur 8
+    const SLOW_INDEXES = [2, 6];
+    const MAX_BASE_VARIATION = 0.3; // wie gleichmäßig die "schnellen" Abstände untereinander sein müssen
+    const SLOW_MIN_RATIO = 1.35; // die "langsamen" Abstände müssen mindestens 1.35x so lang sein wie die schnellen
+    const SLOW_MAX_RATIO = 3.0; // aber nicht absurd viel länger
+
     const btn = document.getElementById('tap-btn');
     const counter = document.getElementById('tap-counter');
     const feedback = document.getElementById('tap-feedback');
@@ -264,14 +269,24 @@
       if (taps.length >= TAPS_NEEDED) {
         const intervals = [];
         for (let i = 1; i < taps.length; i++) intervals.push(taps[i] - taps[i - 1]);
-        const mean = intervals.reduce((a, b) => a + b, 0) / intervals.length;
-        const variance = intervals.reduce((a, b) => a + Math.pow(b - mean, 2), 0) / intervals.length;
-        const cv = Math.sqrt(variance) / mean;
-        if (cv <= MAX_VARIATION) {
-          feedback.textContent = 'Schön im Takt!';
+
+        const baseIntervals = intervals.filter((_, i) => !SLOW_INDEXES.includes(i));
+        const slowIntervals = intervals.filter((_, i) => SLOW_INDEXES.includes(i));
+
+        const baseMean = baseIntervals.reduce((a, b) => a + b, 0) / baseIntervals.length;
+        const baseVariance = baseIntervals.reduce((a, b) => a + Math.pow(b - baseMean, 2), 0) / baseIntervals.length;
+        const baseCv = Math.sqrt(baseVariance) / baseMean;
+
+        const slowRatiosOk = slowIntervals.every((v) => {
+          const ratio = v / baseMean;
+          return ratio >= SLOW_MIN_RATIO && ratio <= SLOW_MAX_RATIO;
+        });
+
+        if (baseCv <= MAX_BASE_VARIATION && slowRatiosOk) {
+          feedback.textContent = 'Schön im Salsa-Takt!';
           feedback.className = 'feedback-row correct';
         } else {
-          feedback.textContent = 'Noch etwas unruhig – nochmal versuchen.';
+          feedback.textContent = 'Noch nicht ganz – 1,2,3 gleichmäßig, dann kurz warten, 5,6,7 gleichmäßig, dann wieder warten. Nochmal versuchen.';
           feedback.className = 'feedback-row wrong';
           reset();
         }

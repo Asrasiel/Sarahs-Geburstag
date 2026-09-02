@@ -255,10 +255,20 @@
       if (taps.length >= p.tapsNeeded) {
         const intervals = [];
         for (let i = 1; i < taps.length; i++) intervals.push(taps[i] - taps[i - 1]);
-        const mean = intervals.reduce((a, b) => a + b, 0) / intervals.length;
-        const variance = intervals.reduce((a, b) => a + Math.pow(b - mean, 2), 0) / intervals.length;
-        const cv = Math.sqrt(variance) / mean;
-        if (cv <= p.maxVariation) {
+
+        const baseIntervals = intervals.filter((_, i) => !p.slowIndexes.includes(i));
+        const slowIntervals = intervals.filter((_, i) => p.slowIndexes.includes(i));
+
+        const baseMean = baseIntervals.reduce((a, b) => a + b, 0) / baseIntervals.length;
+        const baseVariance = baseIntervals.reduce((a, b) => a + Math.pow(b - baseMean, 2), 0) / baseIntervals.length;
+        const baseCv = Math.sqrt(baseVariance) / baseMean;
+
+        const slowRatiosOk = slowIntervals.every((v) => {
+          const ratio = v / baseMean;
+          return ratio >= p.slowMinRatio && ratio <= p.slowMaxRatio;
+        });
+
+        if (baseCv <= p.maxBaseVariation && slowRatiosOk) {
           feedback.textContent = "Richtig!";
           feedback.className = "feedback-row correct";
           setAnnouncer(reactionFor(3, "correct"), "correct");
