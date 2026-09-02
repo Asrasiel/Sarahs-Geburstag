@@ -607,6 +607,7 @@
     let score = 0;
     let active = false;
     let spawnTimer = null;
+    let retryTimeout = null;
     let slots = [];
 
     function updateProgress() {
@@ -722,20 +723,21 @@
         feedback.className = "feedback-row wrong";
         setAnnouncer(reactionFor(id, "wrong"), "wrong");
         triggerChaos(container);
-        setTimeout(() => {
-          reset();
-          active = true;
-          spawnTimer = setInterval(spawnOne, p.spawnIntervalMs);
-        }, 900);
+        active = false;
+        clearInterval(spawnTimer);
+        retryTimeout = setTimeout(startSpawning, 900);
       }
     }
 
-    screenStarters["p" + id] = function () {
+    function startSpawning() {
       clearInterval(spawnTimer);
+      clearTimeout(retryTimeout);
       reset();
       active = true;
       spawnTimer = setInterval(spawnOne, p.spawnIntervalMs);
-    };
+    }
+
+    screenStarters["p" + id] = startSpawning;
   }
 
   // ---------------------------------------------------------------
