@@ -220,10 +220,10 @@
 
   <section class="card game-section">
     <h2>🥁 Tanz mit!</h2>
-    <p>Tipp den Salsa-Grundtakt mit: "1-2-3, 5-6-7" – schnell, schnell, schnell, kurze Pause, schnell, schnell, schnell, kurze Pause. Tipp also 8-mal, wobei der Schritt zur 4 und zur 8 jeweils etwas länger auf sich warten lässt als die anderen.</p>
+    <p>Tipp den Salsa-Grundtakt mit: 1-2-3 schnell, kurze Pause (nicht tippen!), dann 4-5-6 wieder schnell. Also 6-mal tippen, mit einer spürbaren Lücke zwischen dem 3. und 4. Tipp.</p>
     <div class="tap-wrap">
       <button class="tap-button" id="tap-btn">Tipp</button>
-      <div class="tap-counter" id="tap-counter">0 / 8</div>
+      <div class="tap-counter" id="tap-counter">0 / 6</div>
     </div>
     <div class="feedback-row" id="tap-feedback"></div>
   </section>
@@ -243,11 +243,11 @@
 </div>
 
 <script>
-  // --- Spiel 1: Tanz mit! (Salsa-Grundtakt "1-2-3, 5-6-7" mit Pause auf 4 und 8) ---
+  // --- Spiel 1: Tanz mit! (Salsa-Grundtakt "1-2-3, Pause, 4-5-6", Pause wird nicht getippt) ---
   (function () {
-    const TAPS_NEEDED = 8;
-    // Intervall-Indizes (0-basiert) zwischen den 8 Tipps: idx2 = Übergang zur 4, idx6 = Übergang zur 8
-    const SLOW_INDEXES = [2, 6];
+    const TAPS_NEEDED = 6;
+    // Intervall-Index (0-basiert) zwischen den 6 Tipps: idx2 = Lücke zwischen Tipp 3 und Tipp 4 (die Pause)
+    const SLOW_INDEXES = [2];
     const MAX_BASE_VARIATION = 0.3; // wie gleichmäßig die "schnellen" Abstände untereinander sein müssen
     const SLOW_MIN_RATIO = 1.35; // die "langsamen" Abstände müssen mindestens 1.35x so lang sein wie die schnellen
     const SLOW_MAX_RATIO = 3.0; // aber nicht absurd viel länger
@@ -286,7 +286,7 @@
           feedback.textContent = 'Schön im Salsa-Takt!';
           feedback.className = 'feedback-row correct';
         } else {
-          feedback.textContent = 'Noch nicht ganz – 1,2,3 gleichmäßig, dann kurz warten, 5,6,7 gleichmäßig, dann wieder warten. Nochmal versuchen.';
+          feedback.textContent = 'Noch nicht ganz – 1,2,3 schnell tippen, dann kurz warten (nicht tippen!), dann 4,5,6 wieder schnell. Nochmal versuchen.';
           feedback.className = 'feedback-row wrong';
           reset();
         }

@@ -92,15 +92,15 @@ window.MGR_CONTENT = {
       type: "rhythm-tap",
       title: "Station 3 · Im Takt bleiben",
       intro:
-        "Tipp den Salsa-Grundtakt: '1-2-3, 5-6-7' – schnell, schnell, schnell, kurze Pause, schnell, schnell, schnell, kurze Pause. Also 8-mal tippen, wobei der Schritt zur 4 und zur 8 jeweils etwas länger auf sich warten lässt als die anderen.",
-      tapsNeeded: 8,
-      slowIndexes: [2, 6],
+        "Tipp den Salsa-Grundtakt: 1-2-3 schnell, kurze Pause (nicht tippen!), dann 4-5-6 wieder schnell. Also 6-mal tippen, mit einer spürbaren Lücke zwischen dem 3. und 4. Tipp.",
+      tapsNeeded: 6,
+      slowIndexes: [2],
       maxBaseVariation: 0.3,
       slowMinRatio: 1.35,
       slowMaxRatio: 3.0,
       tapButtonLabel: "Tipp",
-      reactionsCorrect: ["Sauber im Salsa-Takt.", "Da stimmt die Pause auf 4 und 8."],
-      reactionsWrong: ["Noch nicht ganz – 1,2,3 gleichmäßig, kurze Pause, 5,6,7 gleichmäßig, kurze Pause. Nochmal."]
+      reactionsCorrect: ["Sauber im Salsa-Takt.", "Da stimmt die Pause zwischen 3 und 4."],
+      reactionsWrong: ["Noch nicht ganz – 1,2,3 schnell, kurze Pause, dann 4,5,6 wieder schnell. Nochmal."]
     },
     {
       id: 4,
