@@ -49,6 +49,22 @@
     padding: 8px;
     margin-bottom: 18px;
   }
+  .sketchfab-embed-wrap {
+    position: relative;
+    width: 100%;
+    padding-top: 66%;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid var(--card-border);
+    background: var(--bg);
+  }
+  .sketchfab-embed-wrap iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
 </style>
 </head>
 <body>
@@ -100,14 +116,11 @@
 
     <div class="card model-card">
       <h3>Geburtstagstorte</h3>
-      <model-viewer
-        src="assets/models/birthday-cake.glb"
-        alt="Geburtstagstorte"
-        camera-controls
-        auto-rotate
-        shadow-intensity="1"
-      ></model-viewer>
-      <p class="model-credit">Modell: "Cake Birthday" von Isa Lousberg · Lizenz: CC0 (Public Domain) · <a href="https://poly.pizza/m/JCT2SAoBud" style="color:inherit;">poly.pizza</a></p>
+      <div class="sketchfab-embed-wrap">
+        <iframe title="Cake" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share allowfullscreen
+          src="https://sketchfab.com/models/39305f294ada4bd69146ccd1bb5ab792/embed"></iframe>
+      </div>
+      <p class="model-credit">Modell: "Cake" von Akshat · Lizenz: CC-BY 4.0 · <a href="https://sketchfab.com/3d-models/cake-39305f294ada4bd69146ccd1bb5ab792" style="color:inherit;">sketchfab.com</a></p>
     </div>
 
     <div class="card model-card">
